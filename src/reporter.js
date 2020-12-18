@@ -137,12 +137,11 @@ module.exports = class TestrunnerReporter {
         endTime = new Date().toISOString();
         log.info('Finished testrun!')
 
+        const hasPassed = numFailedTests === 0
         let tags = process.env.SAUCE_TAGS
         if (tags) {
             tags = tags.split(",")
         }
-
-        hasPassed = numFailedTests === 0
 
         let sessionId;
         if (process.env.ENABLE_DATA_STORE) {
