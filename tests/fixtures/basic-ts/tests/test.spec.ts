@@ -13,7 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-const { folio, it, expect } = require('@playwright/test');
+
+import { it, expect } from '@playwright/test';
 
 it('is a basic test with the page', async ({ page }) => {
   await page.goto('https://playwright.dev/');
