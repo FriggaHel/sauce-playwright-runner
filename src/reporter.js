@@ -3,7 +3,6 @@ const path = require('path')
 
 const logger = require('@wdio/logger').default
 const SauceLabs = require('saucelabs').default
-const { remote } = require('webdriverio')
 
 const { exec } = require('./utils')
 const { LOG_FILES, HOME_DIR, DESIRED_BROWSER } = require('./constants')
@@ -20,9 +19,12 @@ const api = new SauceLabs({
 
 // SAUCE_JOB_NAME is only available for saucectl >= 0.16, hence the fallback
 const jobName = process.env.SAUCE_JOB_NAME || `DevX Playwright Test Run - ${(new Date()).getTime()}`;
+const chromeVersion = '81.0.4044.138';
+const firefoxVersion = '74';
+
 let build = process.env.SAUCE_BUILD_NAME
 
-let startTime, endTime, hasPassed;
+let startTime, endTime;
 
 /**
  * replace placeholders (e.g. $BUILD_ID) with environment values
@@ -56,7 +58,7 @@ const createJobShell = async (tags, api) => {
         attributes: {
             container: false,
             browser: DESIRED_BROWSER,
-            browser_version: '*',
+            browser_version: DESIRED_BROWSER.toLowerCase() === 'firefox' ? firefoxVersion : chromeVersion,
             commands_not_successful: 1, // to be removed
             devx: true,
             os: 'test', // need collect
@@ -109,8 +111,8 @@ const createjobWorkaround = async (tags, api, passed, startTime, endTime) => {
         tags,
         build,
         browserName: DESIRED_BROWSER,
-        browserVersion: '*',
-        platformName: '*' // in docker, no specified platform
+        browserVersion: DESIRED_BROWSER.toLowerCase() === "firefox" ? firefoxVersion : chromeVersion,
+        platformName: 'sauce-devx-runner' // in docker, no specified platform
     };
     
     let sessionId;
