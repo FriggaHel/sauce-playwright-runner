@@ -35,8 +35,8 @@ jobs:
           context: .
           file: ./Dockerfile
           tags: |
-            saucelabs/stt-playwright-jest-node:latest
-            saucelabs/stt-playwright-jest-node:${{ steps.prep.outputs.version }}
+            saucelabs/stt-playwright-folio-node:latest
+            saucelabs/stt-playwright-folio-node:${{ steps.prep.outputs.version }}
   release-windows-bundle:
     runs-on: windows-latest
     steps:
