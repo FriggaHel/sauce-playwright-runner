@@ -16,7 +16,7 @@ jobs:
         name: Checkout
         uses: actions/checkout@v2
 
-      - run: ls -lR && groups && exit 1
+      - run: ls -lR && groups && id && exit 1
 
       - run: make docker
         name: Make Docker
