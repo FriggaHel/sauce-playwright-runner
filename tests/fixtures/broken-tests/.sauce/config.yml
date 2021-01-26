@@ -9,7 +9,7 @@ sauce:
       - e2e
     build: "$BUILD_ID"
 docker:
-  fileTransfer: mount
+  fileTransfer: copy
   image:
     name: saucelabs/stt-playwright-node
     tag: local
