@@ -28,6 +28,8 @@ jobs:
       - run: pushd saucectl && make build && popd
         name: Build Saucectl and run E2E tests
 
+      - run: ls -lR ./tests/basic-js/ && exit 1
+
       # - name: Workaround for container permissions
       #   run: sudo chmod -R 777 tests/
 
